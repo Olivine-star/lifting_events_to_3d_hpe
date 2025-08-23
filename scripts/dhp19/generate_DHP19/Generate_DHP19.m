@@ -11,9 +11,10 @@
 
    % Set the paths of code repository folder, data folder and output folder
    % where to generate files of accumulated events.
-   rootCodeFolder = '/home/gianscarpe/dev/event-based-monocular-hpe/scripts/dhp19/generate_DHP19'; % root directory of the git repo.
-   rootDataFolder = '/data/rslsync/Resilio Sync/DHP19'; % root directory of the data downloaded from resiliosync.
-   outDatasetFolder = '/data/gscarpellini/new_vowel';
+   rootCodeFolder   = 'C:/code/EventHPE/lifting_events_to_3d_hpe/scripts/dhp19/generate_DHP19';
+   rootDataFolder   = 'C:/code/EventHPE/rootDataFolder/DHP19';
+   outDatasetFolder = 'C:/code/EventHPE/outDatasetFolder/constant-count';
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -69,8 +70,9 @@ viconFolder = fullfile(rootDataFolder,'Vicon_data/');
 % output directory where to save files after events accumulation.
 out_folder_append = ['npy_dataset_',num2str(eventsPerFrame),'_events'];
 
-addpath(fullfile(rootCodeFolder, 'read_aedat/'));
-addpath(fullfile(rootCodeFolder, 'generate_DHP19/'));
+addpath(genpath(rootCodeFolder));
+
+
 
 % Setup output folder path, according to accumulation type and spatial resolution.
   outputFolder = fullfile(outDatasetFolder, out_folder_append,[num2str(reshapex),'x',num2str(reshapey)]);
@@ -146,7 +148,14 @@ out_file = fullfile(outputFolder, sprintf('S%d_session_%d_mov_%d_%d_events', ...
 % generated and if the input aedat file exists.
 if (not(exist(strcat(out_file,'.h5'), 'file') == 2)) && (exist(aedatPath, 'file') == 2)
                 
-						       aedat = ImportAedat([movementsPath '/'], strcat(movString, '.aedat'));
+						       if exist('ImportAedat','file')
+                        aedat = ImportAedat([movementsPath '/'], strcat(movString, '.aedat'));
+                    elseif exist('ImportAedatDataVersion1or2','file')
+                        aedat = ImportAedatDataVersion1or2([movementsPath '/'], strcat(movString, '.aedat'));
+                    else
+                        error('Cannot find ImportAedat or ImportAedatDataVersion1or2 on path. Check addpath(genpath(rootCodeFolder)) and rootCodeFolder.');
+                    end
+
 XYZPOS = load(labelPath);
                 
 events = int64(aedat.data.polarity.timeStamp);
@@ -287,8 +296,8 @@ elseif (numSpecialEvents == 2) || (numSpecialEvents == 4)
                 disp(strcat('Processing file: ',outDVSfile));
                 disp(strcat('Tot num of events in all cameras: ', num2str(eventsPerFrame*nbcam)));
                 % Manually choose the function you want to use to generate constant-count or spatio-temporal frames
+                
                 ExtractEventsToFramesAndMeanLabels( ...
-                %ExtractEventsToVoxelAndMeanLabels( ...
                     fileID, ...
                     aedat, ...
                     events, ...
