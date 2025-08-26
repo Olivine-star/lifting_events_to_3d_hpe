@@ -5,7 +5,8 @@ from typing import List
 
 import numpy as np
 import torch
-from kornia import quaternion_to_rotation_matrix
+# from kornia import quaternion_to_rotation_matrix
+from kornia.geometry.conversions import quaternion_to_rotation_matrix
 from pose3d_utils.camera import CameraIntrinsics
 
 from experimenting.utils import Skeleton

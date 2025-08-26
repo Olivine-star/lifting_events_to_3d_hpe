@@ -5,10 +5,10 @@ scikit-learn
 scikit-video
 scipy
 kornia
-hydra-core
+hydra-core==1.0.6
 omegaconf
 opencv-python
-pytorch-lightning
+pytorch-lightning==1.1.6
 tqdm
 numpy
 matplotlib

@@ -7,6 +7,7 @@ defaults:
   - training: margipose
   - hydra: standard
   - hydra/help: help
+  # - _self_
 
 gpus: [0]
 epochs: 100
