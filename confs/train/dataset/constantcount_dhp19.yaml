@@ -2,7 +2,7 @@
 cls: experimenting.dataset.core.DHP19Core
 params:
   name: timecount_dhp19
-  base_path: /data/gscarpellini/dhp19/time_count_dataset
+  base_path: C:/code/EventHPE/outDatasetFolder
   data_dir: ${dataset.params.base_path}/frames
   joints_dir: ${dataset.params.base_path}/labels
 
