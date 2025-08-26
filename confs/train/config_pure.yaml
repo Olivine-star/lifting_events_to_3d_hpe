@@ -1,0 +1,41 @@
+optimizer:
+  name: adam
+  lr: 0.001
+  weight_decay: 0.0001
+
+lr_scheduler:
+  name: step_lr
+  step_size: 10
+  gamma: 0.1
+
+dataset:
+  name: constantcount_dhp19
+  root: C:/path/to/dataset
+
+loss:
+  name: multipixelwise
+
+augmentation_train: {}
+augmentation_test: {}
+
+training:
+  module: margipose
+  backbone: resnet34
+  pretrained: false
+  estimate_depth: false
+
+gpus: [0]
+epochs: 100
+early_stopping: 10
+batch_size: 32
+num_workers: 16
+train_val_split: 0.8
+
+debug: false
+root_dir: C:/code/EventHPE/result/8.26/exps
+model_zoo: C:/code/EventHPE/result/8.26/model_zoo
+project_name: event_hpe
+resume: false
+result_file: results.json
+load_path:
+accelerator: ddp

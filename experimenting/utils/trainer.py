@@ -189,3 +189,4 @@ def _get_comet_logger(exp_name: str, project_name: str) -> LightningLoggerBase:
 def _get_wandb_logger(exp_name: str, project_name: str) -> LightningLoggerBase:
     logger = WandbLogger(name=exp_name, project=project_name,)
     return logger
+

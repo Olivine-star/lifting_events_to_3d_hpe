@@ -1,6 +1,7 @@
 defaults:
   - optimizer: adam
   - lr_scheduler: step_lr
+  # - lr_scheduler: none
   - dataset: constantcount_dhp19
   - loss: multipixelwise
   - augmentation: no_aug

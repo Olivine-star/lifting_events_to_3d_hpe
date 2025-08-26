@@ -68,3 +68,5 @@ git
 *.png
 Pipfile
 Pipfile.lock
+visual/event_sequence_cam0_first10.gif
+event_sequence_cam0.gif

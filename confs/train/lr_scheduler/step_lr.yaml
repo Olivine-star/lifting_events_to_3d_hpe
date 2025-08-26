@@ -4,3 +4,8 @@ params:
   step_size: 10
   gamma: 0.1
     
+# step_lr.yaml
+# _target_: torch.optim.lr_scheduler.StepLR
+# optimizer: ${optimizer}   # 注意这里指向 optimizer 实例
+# step_size: 10
+# gamma: 0.1
